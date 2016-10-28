@@ -7,24 +7,18 @@
       <h2>{{product.name}}</h2>
     </div>
     <div class="col-sm-3 text-sm-left">
-      <div>Price: {{product.price}}</div>
+      <h4 class="text-muted">{{product.price}}$</h4>
     </div>
   </div>
 
-  <br>
   <br>
 
   <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
-      <div class="card-deck-wrapper">
-        <div class="card-deck">
-          <div class="card">
-            <div class="card-header">Description:</div>
-            <div class="card-block">
-              <p class="card-text">{{product.description}}</p>
-            </div>
-          </div>
+      <div class="card">
+        <div class="card-block">
+          <p class="card-text">{{product.description}}</p>
         </div>
       </div>
     </div>
@@ -34,11 +28,11 @@
     <div class="col-sm-8"></div>
     <div class="col-sm-2 text-sm-center">
       <div class="row">
-        <div class="col-sm-6">
-          <a href="products/{{product.id}}/edit" class="card-title card-link">Edit</a>
+        <div class="col-sm-5">
+          <a href="products/{{product.id}}/edit" class="btn btn-success">Edit</a>
         </div>
         <div class="col-sm-6">
-          <a href="#" ng-click="remove_product()" class="card-title card-link">Delete</a>
+          <a href="#" ng-click="remove_product()" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>
