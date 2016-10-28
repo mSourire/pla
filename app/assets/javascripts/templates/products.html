@@ -1,0 +1,36 @@
+<div navpanel></div>
+<div class="container">
+  <div class="row">
+  <h1 class="text-sm-center">Products</h1>
+    <div>
+      <div class="col-sm-6">
+        <h4 class="text-sm-center">Create new</h4>
+        <form name="new_product">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" ng-model="product.name">
+          </div>
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" id="price" ng-model="product.price">
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" rows="5" id="description" ng-model="product.description"></textarea>
+          </div>
+          <button type='button' class="btn btn-primary pull-sm-right" ng-click="submit_product(product)">Submit</button>
+        </form>
+      </div>
+      <div class="col-sm-6 text-sm-center" ng-controller="ProductsController">
+        <h4 class="text-muted" ng-hide="products.length">Here created by you products will be</h4>
+        <h4 class="text-default" ng-show="products.length">Your last products</h4>
+        <div class="card text-sm-left" ng-repeat="product in products">
+          <div class="card-block">
+            <a href="products/{{product.id}}" class="card-title card-link">{{product.name}}</a>
+            <span class="tag tag-primary">{{product.price}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

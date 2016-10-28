@@ -1,0 +1,47 @@
+<div navpanel></div>
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-7 text-sm-left">
+      <h2>{{product.name}}</h2>
+    </div>
+    <div class="col-sm-3 text-sm-left">
+      <div>Price: {{product.price}}</div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <div class="card-deck-wrapper">
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-header">Description:</div>
+            <div class="card-block">
+              <p class="card-text">{{product.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-2 text-sm-center">
+      <div class="row">
+        <div class="col-sm-6">
+          <a href="products/{{product.id}}/edit" class="card-title card-link">Edit</a>
+        </div>
+        <div class="col-sm-6">
+          <a href="#" ng-click="remove_product()" class="card-title card-link">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
