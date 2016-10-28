@@ -5,16 +5,20 @@ class ProductsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: Product.all }
+      format.json { render json: Product.all.order(:id) }
     end
   end
 
   def create
-    new_product = Product.new(allowed_params)
-    if new_product.save
-      head :ok
-    else
-      render status: 500
+    respond_to do |format|
+      format.json do
+        @product = Product.new(permitted_params)
+        if @product.save
+          head :ok
+        else
+          render json: { errors: @product.errors.full_messages }, status: 400
+        end
+      end
     end
   end
 
@@ -25,36 +29,36 @@ class ProductsController < ApplicationController
         format.json { render json: @product }
       else
         format.html { redirect_to root_path }
-        format.json { render status: 404 }
+        format.json { head 404 }
       end
     end
   end
 
   def edit
-    if @product
-      render :edit
-    else
-      redirect_to root_path
-    end
+    redirect_to root_path unless @product
   end
 
   def update
-    if @product.update(allowed_params)
-      head :ok
-    else
-      render status: 500
+    respond_to do |format|
+      format.json do
+        if @product.update(permitted_params)
+          head :ok
+        else
+          render json: { errors: @product.errors.full_messages }, status: 400
+        end
+      end
     end
   end
 
   def destroy
-    @product.destroy
+    @product.try(:destroy) and head 204 or head 404
   end
 
 
   private
 
 
-  def allowed_params
+  def permitted_params
     params.require(:product).permit(:name, :price, :description)
   end
 

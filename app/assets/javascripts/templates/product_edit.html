@@ -8,7 +8,7 @@
         <form name="edit_product">
           <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" ng-model="product.name">
+            <input type="text" class="form-control" id="name" ng-model="product.name" required>
           </div>
           <div class="form-group">
             <label for="price">Price:</label>
@@ -16,9 +16,9 @@
           </div>
           <div class="form-group">
             <label for="description">Description:</label>
-            <textarea class="form-control" rows="5" id="description" ng-model="product.description"></textarea>
+            <textarea class="form-control" rows="5" id="description" ng-model="product.description" required></textarea>
           </div>
-          <button type='button' class="btn btn-primary pull-sm-right" ng-click="submit_product(product)">Submit</button>
+          <button type='button' class="btn btn-primary pull-sm-right" ng-disabled="edit_product.$invalid" ng-click="update_product(product)">Submit</button>
         </form>
       </div>
       <div class="col-sm-3"></div>

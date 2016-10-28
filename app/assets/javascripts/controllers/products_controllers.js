@@ -15,10 +15,13 @@ app.controller('ProductsController', ['$scope', '$route', '$routeParams', '$reso
 
     $scope.products = Product.index();
 
-    $scope.submit_product = function(new_product) {
+    $scope.create_product = function(new_product) {
       Product.create(new_product,
         function() {
           $route.reload();
+        },
+        function(response) {
+          alert(response.data.errors);
         }
       );
     }
@@ -57,10 +60,13 @@ app.controller('ProductsEditController', ['$scope', '$routeParams', '$resource',
       }
     );
 
-    $scope.submit_product = function(updated_product) {
-      Product.update(updated_product,
+    $scope.update_product = function(product) {
+      Product.update(product,
         function() {
           $location.path("/products/" + $routeParams.id);
+        },
+        function(response) {
+          alert(response.data.errors);
         }
       );
     }
