@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: Product.all.order(:id) }
+      format.json { render json: Product.all }
     end
   end
 
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
       format.json do
         @product = Product.new(permitted_params)
         if @product.save
-          head :ok
+          head 201
         else
           render json: { errors: @product.errors.full_messages }, status: 400
         end
@@ -41,10 +41,14 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       format.json do
-        if @product.update(permitted_params)
+        if @product.try(:update, permitted_params)
           head :ok
         else
-          render json: { errors: @product.errors.full_messages }, status: 400
+          if @product
+            render json: { errors: @product.errors.full_messages }, status: 400
+          else
+            head 404
+          end
         end
       end
     end
@@ -60,10 +64,12 @@ class ProductsController < ApplicationController
 
   def permitted_params
     params.require(:product).permit(:name, :price, :description)
+  rescue ActionController::ParameterMissing
+    {}
   end
 
   def find_product
-    @product = Product.where(id: params[:id]).first
+    @product = Product.get(params[:id])
   end
 
 end
